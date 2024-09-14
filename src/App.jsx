@@ -30,7 +30,7 @@ function App() {
   return (
     <div className={`min-h-screen ${isDarkMode ? 'text-white background-light' : 'text-black background'}`}>
       <header className="p-4">
-        <div className={`container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 rounded-lg ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'}`}>
+        <div className={`container py-2 mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 rounded-lg ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'}`}>
           <div className="flex items-center">
             <img src={isDarkMode ? EdwardDark : EdwardLight} alt="Edward logo" className="h-8 w-auto" />
           </div>
@@ -68,7 +68,7 @@ function App() {
 
         {/* Menú móvil */}
         <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden mt-4 ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'} rounded-lg`}>
-          <nav className="px-4 pt-2 pb-4">
+          <nav className="px-4 pt-2 py-5">
             <ul className="space-y-2">
               <li><a href="#about" onClick={toggleMenu}><h5>SOBRE MÍ</h5></a></li>
               <li><a href="#contact" onClick={toggleMenu}><h5>CONTACTO</h5></a></li>
