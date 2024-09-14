@@ -16,7 +16,7 @@ import nodejs from './assets/img/nodejs.png'
 import figma from './assets/img/figma.png'
 import staruml from './assets/img/staruml.png'
 import codeigniter from './assets/img/codeigniter.png'
-import './App.css';
+import './App.css'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -30,26 +30,20 @@ function App() {
   return (
     <div className={`min-h-screen ${isDarkMode ? 'text-white background-light' : 'text-black background'}`}>
       <header className="p-4">
-        <div className={`container mx-auto flex flex-wrap justify-between items-center px-4 sm:px-6 lg:px-8 rounded-lg ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'}`}>
+        <div className={`container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8 rounded-lg ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'}`}>
           <div className="flex items-center">
             <img src={isDarkMode ? EdwardDark : EdwardLight} alt="Edward logo" className="h-8 w-auto" />
           </div>
 
-          <button onClick={toggleMenu} className="md:hidden">
-            <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-
-          <nav className={`${isMenuOpen ? 'block' : 'hidden'} md:flex md:items-center w-full md:w-auto mt-4 md:mt-0`}>
-            <ul className="flex flex-col md:flex-row md:space-x-4">
-              <li className="mb-2 md:mb-0"><a href="#about" onClick={toggleMenu}><h5>Acerca de mí</h5></a></li>
-              <li className="mb-2 md:mb-0"><a href="#contact" onClick={toggleMenu}><h5>Habilidades</h5></a></li>
-              <li className="mb-2 md:mb-0"><a href="#projects" onClick={toggleMenu}><h5>PROJECTS</h5></a></li>
+          <nav className="hidden md:flex md:items-center">
+            <ul className="flex space-x-4">
+              <li><a href="#about"><h5>SOBRE MÍ</h5></a></li>
+              <li><a href="#contact"><h5>CONTACTO</h5></a></li>
+              <li><a href="#projects"><h5>PROYECTOS</h5></a></li>
             </ul>
           </nav>
 
-          <div className="flex items-center space-x-4 mt-4 md:mt-0">
+          <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={toggleDarkMode}
               className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'}`}
@@ -64,6 +58,38 @@ function App() {
               <span className="ml-2">{language.toUpperCase()}</span>
             </button>
           </div>
+
+          <button onClick={toggleMenu} className="md:hidden">
+            <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+
+        {/* Menú móvil */}
+        <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden mt-4 ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'} rounded-lg`}>
+          <nav className="px-4 pt-2 pb-4">
+            <ul className="space-y-2">
+              <li><a href="#about" onClick={toggleMenu}><h5>SOBRE MÍ</h5></a></li>
+              <li><a href="#contact" onClick={toggleMenu}><h5>CONTACTO</h5></a></li>
+              <li><a href="#projects" onClick={toggleMenu}><h5>PROYECTOS</h5></a></li>
+            </ul>
+            <div className="mt-4 flex items-center space-x-4">
+              <button
+                onClick={toggleDarkMode}
+                className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'}`}
+              >
+                {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
+              </button>
+              <button
+                onClick={toggleLanguage}
+                className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
+              >
+                <Globe size={24} />
+                <span className="ml-2">{language.toUpperCase()}</span>
+              </button>
+            </div>
+          </nav>
         </div>
       </header>
 
@@ -77,7 +103,7 @@ function App() {
           <div className="w-full md:w-2/3 md:ml-4"> 
             <div className={`p-2 mt-4 md:mt-20 rounded-lg text-center w-full md:w-96 shadow-lg md:ml-44 ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'}`}>
               <h1 className='font-bold py-2'>Desarrollador Web Frontend</h1>
-              <p> <span className='font-bold'>Estudiante</span> de <span className='font-bold'>Desarrollo de Software</span>, con gran interes en acceder al mercado laboral para proner en practica mis conocimientos. <span className='font-bold'>Trabajador, comunicativo y comprometido.</span> Deseando encontrar una oportunidad para adquirir más experiencia profesional</p>           
+              <p> <span className='font-bold'>Estudiante</span> de <span className='font-bold'>Desarrollo de Software</span>, con gran interés en acceder al mercado laboral para poner en práctica mis conocimientos. <span className='font-bold'>Trabajador, comunicativo y comprometido.</span> Deseando encontrar una oportunidad para adquirir más experiencia profesional</p>           
             </div>
           </div>
         </section>
