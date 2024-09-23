@@ -34,6 +34,13 @@ function App() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const toggleLangMenu = () => setIsLangMenuOpen(!isLangMenuOpen);
 
+  const navItems = [
+    { href: "#about", labelEs: "SOBRE MÍ", labelEn: "ABOUT ME" },
+    { href: "#skills", labelEs: "HABILIDADES", labelEn: "SKILLS" },
+    { href: "#contact", labelEs: "CONTACTO", labelEn: "CONTACT" },
+    { href: "#projects", labelEs: "PROYECTOS", labelEn: "PROJECTS" },
+  ];
+
   return (
     <div className={`min-h-screen ${isDarkMode ? 'text-white background-light' : 'text-black background'}`}>
       <header className="fixed top-0 left-0 right-0 z-50 p-2 sm:p-4">
@@ -44,43 +51,47 @@ function App() {
 
           <nav className="hidden md:flex md:items-center">
             <ul className="flex space-x-2 sm:space-x-4">
-              <li><a href="#about" className='font-semibold font-mono text-sm sm:text-base'><h5>{language === 'es' ? 'SOBRE MÍ' : 'ABOUT ME'}</h5></a></li>
-              <li><a href="#contact" className='font-semibold font-mono text-sm sm:text-base'><h5>{language === 'es' ? 'CONTACTO' : 'CONTACT'}</h5></a></li>
-              <li><a href="#projects" className='font-semibold font-mono text-sm sm:text-base'><h5>{language === 'es' ? 'PROYECTOS' : 'PROJECTS'}</h5></a></li>
+              {navItems.map((item, index) => (
+                <li key={index}>
+                  <a 
+                    href={item.href} 
+                    className="font-semibold font-mono text-sm sm:text-base relative group"
+                  >
+                    <h5>{language === 'es' ? item.labelEs : item.labelEn}</h5>
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-current transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100"></span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
 
           <div className="hidden md:flex items-center space-x-2 sm:space-x-4">
             <button
               onClick={toggleDarkMode}
-              className={`p-1 sm:p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'}`}
+              className={`p-1 sm:p-2 rounded-full transition-colors duration-300 ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'}`}
             >
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <div className="relative">
               <button
                 onClick={toggleLangMenu}
-                className={`p-1 sm:p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
+                className={`p-1 sm:p-2 rounded-full transition-colors duration-300 ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
               >
                 <img src={language === 'es' ? españa : UK} alt={language === 'es' ? 'Español' : 'English'} className="w-5 h-3 sm:w-6 sm:h-4" />
                 <ChevronDown size={16} className="ml-1" />
               </button>
               {isLangMenuOpen && (
                 <div className={`absolute right-0 mt-2 py-2 w-40 sm:w-48 rounded-md shadow-lg ${isDarkMode ? 'bg-gray-700' : 'bg-white'} ring-1 ring-black ring-opacity-5`}>
-                  <button
-                    className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-xs sm:text-sm w-full text-left flex items-center`}
-                    onClick={() => toggleLanguage('es')}
-                  >
-                    <img src={españa} alt="Español" className="w-5 h-3 sm:w-6 sm:h-4 mr-2" />
-                    Español
-                  </button>
-                  <button
-                    className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-xs sm:text-sm w-full text-left flex items-center`}
-                    onClick={() => toggleLanguage('en')}
-                  >
-                    <img src={UK} alt="English" className="w-5 h-3 sm:w-6 sm:h-4 mr-2" />
-                    English
-                  </button>
+                  {['es', 'en'].map((lang) => (
+                    <button
+                      key={lang}
+                      className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-xs sm:text-sm w-full text-left flex items-center transition-colors duration-300`}
+                      onClick={() => toggleLanguage(lang)}
+                    >
+                      <img src={lang === 'es' ? españa : UK} alt={lang === 'es' ? 'Español' : 'English'} className="w-5 h-3 sm:w-6 sm:h-4 mr-2" />
+                      {lang === 'es' ? 'Español' : 'English'}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>
@@ -97,41 +108,46 @@ function App() {
         <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden mt-2 sm:mt-4 ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'} rounded-lg`}>
           <nav className="px-2 sm:px-4 pt-2 pb-4 flex flex-col items-center">
             <ul className="space-y-2 w-full">
-              <li><a href="#about" className='font-semibold font-mono text-sm sm:text-base text-center' onClick={toggleMenu}><h5>{language === 'es' ? 'SOBRE MÍ' : 'ABOUT ME'}</h5></a></li>
-              <li><a href="#contact" className='font-semibold font-mono text-sm sm:text-base text-center' onClick={toggleMenu}><h5>{language === 'es' ? 'CONTACTO' : 'CONTACT'}</h5></a></li>
-              <li><a href="#projects" className='font-semibold font-mono text-sm sm:text-base text-center' onClick={toggleMenu}><h5>{language === 'es' ? 'PROYECTOS' : 'PROJECTS'}</h5></a></li>
+              {navItems.map((item, index) => (
+                <li key={index}>
+                  <a 
+                    href={item.href} 
+                    className="font-semibold font-mono text-sm sm:text-base text-center block relative group"
+                    onClick={toggleMenu}
+                  >
+                    <h5>{language === 'es' ? item.labelEs : item.labelEn}</h5>
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-current transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100"></span>
+                  </a>
+                </li>
+              ))}
             </ul>
             <div className="mt-4 flex items-center space-x-4">
               <button
                 onClick={toggleDarkMode}
-                className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'}`}
+                className={`p-2 rounded-full transition-colors duration-300 ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'}`}
               >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               <div className="relative">
                 <button
                   onClick={toggleLangMenu}
-                  className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
+                  className={`p-2 rounded-full transition-colors duration-300 ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
                 >
                   <img src={language === 'es' ? españa : UK} alt={language === 'es' ? 'Español' : 'English'} className="w-5 h-3 sm:w-6 sm:h-4" />
                   <ChevronDown size={16} className="ml-1" />
                 </button>
                 {isLangMenuOpen && (
                   <div className={`absolute right-0 mt-2 py-2 w-40 sm:w-48 rounded-md shadow-lg ${isDarkMode ? 'bg-gray-700' : 'bg-white'} ring-1 ring-black ring-opacity-5`}>
-                    <button
-                      className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-xs sm:text-sm w-full text-left flex items-center`}
-                      onClick={() => toggleLanguage('es')}
-                    >
-                      <img src={españa} alt="Español" className="w-5 h-3 sm:w-6 sm:h-4 mr-2" />
-                      Español
-                    </button>
-                    <button
-                      className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-xs sm:text-sm w-full text-left flex items-center`}
-                      onClick={() => toggleLanguage('en')}
-                    >
-                      <img src={UK} alt="English" className="w-5 h-3 sm:w-6 sm:h-4 mr-2" />
-                      English
-                    </button>
+                    {['es', 'en'].map((lang) => (
+                      <button
+                        key={lang}
+                        className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-xs sm:text-sm w-full text-left flex items-center transition-colors duration-300`}
+                        onClick={() => toggleLanguage(lang)}
+                      >
+                        <img src={lang === 'es' ? españa : UK} alt={lang === 'es' ? 'Español' : 'English'} className="w-5 h-3 sm:w-6 sm:h-4 mr-2" />
+                        {lang === 'es' ? 'Español' : 'English'}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
@@ -155,7 +171,7 @@ function App() {
               <p className='font-mono px-2 py-4 text-sm sm:text-base'>
                 <span className='font-bold'>{language === 'es' ? 'Estudiante' : 'Student'}</span> {language === 'es' ? 'de' : 'of'} <span className='font-bold'>{language === 'es' ? 'Desarrollo de Software' : 'Software Development'}</span>, {language === 'es' ? 'con gran interés en acceder al mercado laboral para poner en práctica mis conocimientos.' : 'with great interest in entering the job market to put my knowledge into practice.'}
                 <span className='font-bold'>{language === 'es' ? 'Trabajador, comunicativo y comprometido.' : 'Hardworking, communicative and committed.'}</span>
-                {language === 'es' ? 'Deseando encontrar una oportunidad para adquirir más experiencia profesional' : 'Eager to find an opportunity to gain more professional experience'}
+                {language === 'es' ? ' Deseando encontrar una oportunidad para adquirir más experiencia profesional' : ' Eager to find an opportunity to gain more professional experience'}
               </p>
             </div>
           </div>
