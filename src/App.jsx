@@ -37,8 +37,8 @@ function App() {
   const navItems = [
     { href: "#about", labelEs: "SOBRE MÍ", labelEn: "ABOUT ME" },
     { href: "#skills", labelEs: "HABILIDADES", labelEn: "SKILLS" },
-    { href: "#contact", labelEs: "CONTACTO", labelEn: "CONTACT" },
     { href: "#projects", labelEs: "PROYECTOS", labelEn: "PROJECTS" },
+    { href: "#contact", labelEs: "CONTACTO", labelEn: "CONTACT" },
   ];
 
   return (
@@ -57,7 +57,7 @@ function App() {
                     href={item.href} 
                     className="font-semibold font-mono text-sm sm:text-base relative group"
                   >
-                    <h5>{language === 'es' ? item.labelEs : item.labelEn}</h5>
+                    <h5 className='mr-4'>{language === 'es' ? item.labelEs : item.labelEn}</h5>
                     <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-current transform scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100"></span>
                   </a>
                 </li>
@@ -208,11 +208,22 @@ function App() {
           </div>
         </section>
 
-        {/* EDUCATION */}
-
-        {/* EXPERIENCE */}
-
         {/* PROJECTS */}
+         <section id='projects' className="flex flex-col md:flex-row items-center md:items-start">
+          <div className="w-full md:w-1/3 mb-4 md:mb-0">
+            <img src={Avatar} alt="Avatar" className='w-full h-auto max-w-xs mx-auto' />
+          </div>
+          <div className="w-full md:w-2/3 md:ml-4">
+            <div className={`p-2 mt-4 md:mt-12 rounded-lg text-center w-full max-w-md mx-auto md:ml-0 lg:ml-24 shadow-lg ${isDarkMode ? 'bg-gray-100 text-black' : 'bg-gray-700 text-white'}`}>
+              <h1 className='font-bold py-2 font-mono text-lg sm:text-xl'>{language === 'es' ? 'Desarrollador Web Frontend' : 'Frontend Web Developer'}</h1>
+              <p className='font-mono px-2 py-4 text-sm sm:text-base'>
+                <span className='font-bold'>{language === 'es' ? 'Estudiante' : 'Student'}</span> {language === 'es' ? 'de' : 'of'} <span className='font-bold'>{language === 'es' ? 'Desarrollo de Software' : 'Software Development'}</span>, {language === 'es' ? 'con gran interés en acceder al mercado laboral para poner en práctica mis conocimientos.' : 'with great interest in entering the job market to put my knowledge into practice.'}
+                <span className='font-bold'>{language === 'es' ? 'Trabajador, comunicativo y comprometido.' : 'Hardworking, communicative and committed.'}</span>
+                {language === 'es' ? ' Deseando encontrar una oportunidad para adquirir más experiencia profesional' : ' Eager to find an opportunity to gain more professional experience'}
+              </p>
+            </div>
+          </div>
+        </section>
 
         {/* CONTACT */}
 
