@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sun, Moon, Globe } from 'lucide-react';
+import { Sun, Moon, ChevronDown } from 'lucide-react';
 import EdwardDark from './assets/img/edward-logo-dark.png';
 import EdwardLight from './assets/img/edward-logo-light.png';
 import Avatar from './assets/img/avatar.png';
@@ -16,16 +16,23 @@ import nodejs from './assets/img/nodejs.png';
 import figma from './assets/img/figma.png';
 import staruml from './assets/img/staruml.png';
 import codeigniter from './assets/img/codeigniter.png';
+import españa from './assets/img/españa.png'
+import UK from './assets/img/uk.png'
 import './App.css';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [language, setLanguage] = useState('es');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
-  const toggleLanguage = () => setLanguage(prevLang => prevLang === 'es' ? 'en' : 'es');
+  const toggleLanguage = (lang) => {
+    setLanguage(lang);
+    setIsLangMenuOpen(false);
+  };
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleLangMenu = () => setIsLangMenuOpen(!isLangMenuOpen);
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'text-white background-light' : 'text-black background'}`}>
@@ -50,13 +57,33 @@ function App() {
             >
               {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
             </button>
-            <button
-              onClick={toggleLanguage}
-              className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
-            >
-              <Globe size={24} />
-              <span className="ml-2">{language.toUpperCase()}</span>
-            </button>
+            <div className="relative">
+              <button
+                onClick={toggleLangMenu}
+                className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
+              >
+                <img src={language === 'es' ? españa : UK} alt={language === 'es' ? 'Español' : 'English'} className="w-6 h-4" />
+                <ChevronDown size={20} className="ml-1" />
+              </button>
+              {isLangMenuOpen && (
+                <div className={`absolute right-0 mt-2 py-2 w-48 rounded-md shadow-lg ${isDarkMode ? 'bg-gray-700' : 'bg-white'} ring-1 ring-black ring-opacity-5`}>
+                  <button
+                    className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-sm w-full text-left flex items-center`}
+                    onClick={() => toggleLanguage('es')}
+                  >
+                    <img src={españa} alt="Español" className="w-6 h-4 mr-2" />
+                    Español
+                  </button>
+                  <button
+                    className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-sm w-full text-left flex items-center`}
+                    onClick={() => toggleLanguage('en')}
+                  >
+                    <img src={UK} alt="English" className="w-6 h-4 mr-2" />
+                    English
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           <button onClick={toggleMenu} className="md:hidden">
@@ -81,13 +108,33 @@ function App() {
               >
                 {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
               </button>
-              <button
-                onClick={toggleLanguage}
-                className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
-              >
-                <Globe size={24} />
-                <span className="ml-2">{language.toUpperCase()}</span>
-              </button>
+              <div className="relative">
+                <button
+                  onClick={toggleLangMenu}
+                  className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-600 hover:text-white' : 'hover:text-black hover:bg-gray-300'} flex items-center`}
+                >
+                  <img src={language === 'es' ? españa : UK} alt={language === 'es' ? 'Español' : 'English'} className="w-6 h-4" />
+                  <ChevronDown size={20} className="ml-1" />
+                </button>
+                {isLangMenuOpen && (
+                  <div className={`absolute right-0 mt-2 py-2 w-48 rounded-md shadow-lg ${isDarkMode ? 'bg-gray-700' : 'bg-white'} ring-1 ring-black ring-opacity-5`}>
+                    <button
+                      className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-sm w-full text-left flex items-center`}
+                      onClick={() => toggleLanguage('es')}
+                    >
+                      <img src={españa} alt="Español" className="w-6 h-4 mr-2" />
+                      Español
+                    </button>
+                    <button
+                      className={`${isDarkMode ? 'text-white hover:bg-gray-600' : 'text-gray-700 hover:bg-gray-100'} block px-4 py-2 text-sm w-full text-left flex items-center`}
+                      onClick={() => toggleLanguage('en')}
+                    >
+                      <img src={UK} alt="English" className="w-6 h-4 mr-2" />
+                      English
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </nav>
         </div>
